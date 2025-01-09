@@ -118,3 +118,17 @@ services:
     volumes:
       - ${COMMON_PATH}/configs/jellyseerr:/app/config
     restart: unless-stopped
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${COMMON_PATH}/configs/bazarr:/config
+      - ${COMMON_PATH}/radarr/movies:/movies #optional
+      - ${COMMON_PATH}/sonarr/tv:/tv #optional
+    ports:
+      - 6767:6767
+    restart: unless-stopped
